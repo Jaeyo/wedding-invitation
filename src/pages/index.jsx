@@ -1,50 +1,30 @@
 var React = require('react');
 var PolymerIcon = require('../comps/polymer-icon.jsx');
-var Clearfix = require('../comps/clearfix.jsx');
+var NavBar = require('./comps/nav-bar.jsx');
+var HomePage = require('./comps/home.jsx');
+var PhotoPage = require('./comps/photo.jsx');
+var MapPage = require('./comps/map.jsx');
+var GuestBookPage = require('./comps/guest-book.jsx');
 require('./index.less');
 require('../reset.less');
 
 var Page = React.createClass({
+	getInitialState() {
+		return { page: 'guest-book' };
+	},
+
+	onPageChange(page) {
+		this.setState({ page: page });
+	},
+
 	render() {
 		return (
-			<div className="container">
-				<div className="p1">
-					<div className="title">we getting married</div>
-					<div className="subtitle">재용 & 보경</div>
-				</div>
-				<div className="p2">
-					<div className="ring-div">
-						<span className="ring-icon">
-							<PolymerIcon icon="marriage" size="7" />
-						</span>
-					</div>
-					<div className="desc">
-						저녁을 함께 먹던 사이에서<br />
-						아침을 함께 먹는 사이가 됩니다.<br />
-						두 사람, 하나되어 행복하게 살겠습니다.<br />
-						감사합니다.<br />
-					</div>
-					<div className="pic">
-						<img src="http://t1.daumcdn.net/news/201511/17/reuters/20151117114740302dpyu.jpg" />
-					</div>
-					<div className="when-where">
-						<div>
-							<label>when</label>
-							<div className="when">2015. 12. 19 SAT, 13:30</div>
-							<Clearfix />
-						</div>
-						<div>
-							<label>where</label>
-							<div className="where">충북 충주시 네스트웨딩홀</div>
-							<Clearfix />
-						</div>
-					</div>
-				</div>
-				<div className="p3">
-					<span className="balloon-icon">
-						<PolymerIcon icon="balloon" size="7" />
-					</span>
-				</div>
+			<div>
+				<HomePage visible={this.state.page === 'home'} />
+				<NavBar onPageChange={this.onPageChange} />
+				<PhotoPage visible={this.state.page === 'photo'} />
+				<MapPage visible={this.state.page === 'map'} />
+				<GuestBookPage visible={this.state.page === 'guest-book'} />
 			</div>
 		);
 	}
