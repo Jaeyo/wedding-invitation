@@ -1,7 +1,5 @@
 var React = require('react');
 var PolymerIcon = require('../../comps/polymer-icon.jsx');
-var GoogleMap = require('react-google-maps').GoogleMap;
-var Marker = require('react-google-maps').Marker;
 require('./map.less');
 
 var MapPage = React.createClass({
@@ -13,30 +11,25 @@ var MapPage = React.createClass({
 		return { visible: false };
 	},
 
+	getDaumMapMarkup() {
+		return
+			'<div id="daumRoughmapContainer1448251629479" className="root_daum_roughmap root_daum_roughmap_landing"></div> \
+			<script charset="UTF-8" class="daum_roughmap_loader_script" src="http://dmaps.daum.net/map_js_init/roughmapLoader.js"></script>
+			<script charset="UTF-8">
+				new daum.roughmap.Lander({
+					"timestamp" : "1448251629479",
+					"key" : "6v47",
+					"mapWidth" : "320",
+					"mapHeight" : "200"
+				}).render();
+			</script>';
+	},
+
 	render() {
 		return (
-			<div
-				className="map-container"
-				style={{ display: this.props.visible === true ? 'block' : 'none' }}>
-				<div className="map">
-					<GoogleMap
-						containerProps={{
-							style: {
-								height: '100%'
-							}
-						}}
-						defaultZoom={16}
-						defaultCenter={{lat: 36.994377, lng: 127.927870}}>
-						<Marker 
-							key="test"
-							defaultAnimation={2}
-							position={{
-								lat: 36.994366, 
-								lng: 127.927870
-							}} />
-					</GoogleMap>
-				</div>
-			</div>
+			<div className="map-container"
+				style={{ display: this.props.visible === true ? 'block' : 'none' }}
+				dangerouslySetInnerHTML={this.getDaumMapMarkup()} />
 		);
 	}
 });
