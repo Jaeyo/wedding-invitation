@@ -29,25 +29,25 @@ var NavBar = React.createClass({
 				<span 
 					className="home-icon"
 					onClick={this.goToHome}>
-					<PolymerIcon icon="home" size="100" />
+					<PolymerIcon icon="home" size="30" />
 					<label>처음으로</label>
 				</span>
 				<span 
 					className="camera-icon"
 					onClick={this.goToPhoto}>
-					<PolymerIcon icon="camera" size="4" />
+					<PolymerIcon icon="camera" size="1.4" />
 					<label>사진첩</label>
 				</span>
 				<span 
 					className="map-icon"
 					onClick={this.goToMap}>
-					<PolymerIcon icon="map" size="4" />
+					<PolymerIcon icon="map" size="1.4" />
 					<label>오시는 길</label>
 				</span>
 				<span 
 					className="guest-book-icon"
 					onClick={this.goToGuestBook}>
-					<PolymerIcon icon="guest-book" size="40" />
+					<PolymerIcon icon="guest-book" size="14" />
 					<label>방명록</label>
 				</span>
 			</div>

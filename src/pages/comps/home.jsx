@@ -24,7 +24,7 @@ var HomePage = React.createClass({
 				<div className="p2">
 					<div className="ring-div">
 						<span className="ring-icon">
-							<PolymerIcon icon="marriage" size="7" />
+							<PolymerIcon icon="marriage" size="2" />
 						</span>
 					</div>
 					<div className="desc">
@@ -54,7 +54,7 @@ var HomePage = React.createClass({
 				<div className="p3">
 					<div>
 						<span className="balloon-icon">
-							<PolymerIcon icon="balloon" size="4" />
+							<PolymerIcon icon="balloon" size="1.4" />
 						</span>
 					</div>
 				</div>
