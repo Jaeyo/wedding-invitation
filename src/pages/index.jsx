@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var PolymerIcon = require('../comps/polymer-icon.jsx');
 var NavBar = require('./comps/nav-bar.jsx');
 var HomePage = require('./comps/home.jsx');
@@ -30,4 +31,4 @@ var Page = React.createClass({
 	}
 });
 
-module.exports = Page;
+ReactDOM.render(<Page />, document.getElementById('root'));
