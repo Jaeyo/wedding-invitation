@@ -1,7 +1,6 @@
 var React = require('react');
 var PolymerIcon = require('../../comps/polymer-icon.jsx');
 var server = require('../../util/server.js');
-var _ = require('underscore');
 var Button = require('material-ui/lib/raised-button');
 var TextField = require('material-ui/lib/text-field');
 var Card = require('material-ui/lib/card/card');
@@ -23,7 +22,7 @@ var GuestBookPage = React.createClass({
 		return {
 			name: '',
 			msg: '',
-			lastGuestBookKey: null,
+			lastGuestBookUUID: null,
 			guestBooks: []
 		};
 	},
@@ -34,13 +33,13 @@ var GuestBookPage = React.createClass({
 
 	loadGuestBook() {
 		server.guestbook.get({
-			startKey: this.state.lastGuestBookKey == null ? null : this.state.lastGuestBookKey,
+			startUUID: this.state.lastGuestBookUUID == null ? null : this.state.lastGuestBookUUID,
 			count: 10
 		}).then(function(resp) {
 			if(resp.ok) {
 				this.setState({ guestBooks: this.state.guestBooks.concat(resp.guestBooks) });
 			} else {
-				alert('error: ' + JSON.stringify(err));
+				alert('error: ' + JSON.stringify(resp.error));
 				console.log(resp.error); //DEBUG
 			}
 		}.bind(this)).catch(function(err) {

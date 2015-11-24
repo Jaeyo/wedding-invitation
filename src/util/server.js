@@ -7,19 +7,19 @@ var url = {
 
 module.exports = {
 	guestbook: {
-		// args: startKey, count
+		// args: startUUID, count
 		get(args) {
-			if(args.startKey == null) args.startKey = 'top';
+			if(args.startUUID == null) args.startUUID = 'top';
 
 			return new Promise(function(resolve, reject) {
 				request
 					.get(url.guestbook)
 					.query({
-						startKey: args.startKey,
+						startUUID: args.startUUID,
 						count: args.count
 					}).end(function(resp) {
 						if(resp.ok) {
-							resolve(resp.body);
+							resolve(resp.body.data);
 						} else {
 							reject(resp.error)
 						}
@@ -42,7 +42,7 @@ module.exports = {
 						msg: args.msg
 					}).end(function(resp) {
 						if(resp.ok) {
-							resolve(resp.body);
+							resolve(resp.body.data);
 						} else {
 							reject(resp.error);
 						}

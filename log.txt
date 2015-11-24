@@ -14,3 +14,22 @@
 { port: 3000 }
 2015-11-24T12:31:36.510Z - info: server started 
 { port: 3000 }
+2015-11-24T13:17:56.623Z - info: server started 
+{ port: 3000 }
+2015-11-24T13:18:51.413Z - info: server started 
+{ port: 3000 }
+2015-11-24T13:19:33.496Z - info: server started 
+{ port: 3000 }
+2015-11-24T13:20:22.902Z - info: server started 
+{ port: 3000 }
+2015-11-24T13:20:25.920Z - info: GET, /data/guestbook
+2015-11-24T14:19:04.369Z - info: server started 
+{ port: 3000 }
+2015-11-24T14:20:25.213Z - info: server started 
+{ port: 3000 }
+2015-11-24T14:20:58.080Z - info: server started 
+{ port: 3000 }
+2015-11-24T14:21:36.831Z - info: server started 
+{ port: 3000 }
+2015-11-24T14:21:43.710Z - info: GET, /data/guestbook
+2015-11-24T14:21:43.711Z - warn: invalid params: 
