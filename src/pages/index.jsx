@@ -28,6 +28,8 @@ var Page = React.createClass({
 				<GuestBookPage visible={this.state.page === 'guest-book'} />
 			</div>
 		);
+
+		
 	}
 });
 
