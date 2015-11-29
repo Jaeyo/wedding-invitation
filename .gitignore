@@ -5,3 +5,4 @@ dist
 *.db
 test.js
 public/bundle.js
+log.txt
