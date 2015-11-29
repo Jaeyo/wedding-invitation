@@ -4,3 +4,4 @@ npm-debug.log
 dist
 *.db
 test.js
+public/bundle.js

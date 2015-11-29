@@ -35,7 +35,7 @@ var HomePage = React.createClass({
 					</div>
 					<div className="pic">
 						<img 
-							src="http://t1.daumcdn.net/news/201511/17/reuters/20151117114740302dpyu.jpg"
+							src='https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG0018.jpg'
 							onClick={this.goToPhoto} />
 					</div>
 					<div className="when-where">
