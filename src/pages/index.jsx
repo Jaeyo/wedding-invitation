@@ -11,7 +11,7 @@ require('../reset.less');
 
 var Page = React.createClass({
 	getInitialState() {
-		return { page: 'guest-book' };
+		return { page: 'home' };
 	},
 
 	onPageChange(page) {

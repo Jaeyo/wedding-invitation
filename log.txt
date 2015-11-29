@@ -892,3 +892,13 @@
 { page: '1' }
 2015-11-29T09:29:03.428Z - info: GET, /data/guestbook 
 { page: '1' }
+2015-11-29T09:41:42.762Z - info: server started 
+{ port: 3000 }
+2015-11-29T09:41:52.623Z - info: GET, /data/guestbook 
+{ page: '1' }
+2015-11-29T09:42:10.193Z - info: GET, /data/guestbook 
+{ page: '1' }
+2015-11-29T09:42:33.658Z - info: GET, /data/guestbook 
+{ page: '1' }
+2015-11-29T09:44:37.925Z - info: GET, /data/guestbook 
+{ page: '1' }
