@@ -89,6 +89,15 @@ var GuestBookPage = React.createClass({
 		});
 	},
 
+	test1() {
+		var msg = prompt('asdf');
+		alert(msg);
+	},
+
+	test2() {
+		alert('asdfoi');
+	},
+
 	render() {
 		var textFieldProps = {
 			underlineFocusStyle: { borderColor: 'gray' },
@@ -142,6 +151,15 @@ var GuestBookPage = React.createClass({
 					)
 				}
 			</div>
+			<Button
+				label="test1"
+				onClick={this.test1}
+				fullWidth={true} />
+			<Button
+				label="test2"
+				onClick={this.test2}
+				fullWidth={true} />
+			<input type="file" />
 		);
 	}
 });
