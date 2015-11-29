@@ -1,4 +1,6 @@
 var React = require('react');
+var server = require('../../util/server.js');
+var util = require('util');
 var LazyLoad = require('react-lazy-load').default;
 var PolymerIcon = require('../../comps/polymer-icon.jsx');
 require('./photo.less');
@@ -81,8 +83,20 @@ var PhotoPage = React.createClass({
 	},
 
 	componentDidUpdate(prevProps, prevState) {
-		if(prevProps.visible === false && this.props.visible === true)
+		if(prevProps.visible === false && this.props.visible === true) {
 			window.scrollTo(0, 0);
+			server.info.post({ data: 'photo visible true' });
+
+			var counter = 3;
+			var infoFn = function() {
+				if(this.props.visible === true) {
+					server.info.post({ data: util.format('photo stay %s', counter) });
+					counter += 3;
+					window.setTimeout(infoFn, 3000);
+				}
+			}.bind(this);
+			window.setTimeout(infoFn, 3000);
+		}
 	},
 
 	render() {

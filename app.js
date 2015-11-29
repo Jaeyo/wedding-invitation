@@ -4,6 +4,7 @@ var BodyParser = require('body-parser');
 var winston = require('winston');
 var uuid = require('node-uuid');
 var GuestBookModel = require('./src/server/model/guestbook.js');
+var TraceModel = require('./src/server/model/trace.js');
 
 var logger = new (winston.Logger)({
 	transports: [
@@ -34,11 +35,9 @@ app.use(BodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '/public')));
 
 
-
-//params: page
+//query: page
 app.get('/data/guestbook', function(req, resp) {
 	logger.info('GET, /data/guestbook', req.query);
-	logger.info(req.ip); //DEBUG
 
 	if(req.query.page == null) {
 		logger.warn('invalid params: ', req.query);
@@ -55,6 +54,17 @@ app.get('/data/guestbook', function(req, resp) {
 		});
 });
 
+//query: data
+app.get('/data/info', function(req, resp) {
+	logger.info('GET, /data/info', req.query);
+	resp.json({ ok: true });
+	TraceModel.push({
+		regdate: new Date(),
+		ip: req.ip,
+		data: req.query.data
+	});
+});
+
 //body: name, msg
 app.post('/data/guestbook', function(req, resp) {
 	logger.info('POST , /data/guestbook', req.body);
@@ -63,6 +73,7 @@ app.post('/data/guestbook', function(req, resp) {
 		uuid: uuid.v4(),
 		name: req.body.name,
 		msg: req.body.msg,
+		ip: req.ip,
 		regdate: new Date()
 	};
 

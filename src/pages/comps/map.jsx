@@ -1,5 +1,6 @@
 var React = require('react');
 var util = require('util');
+var server = require('../../util/server.js');
 var PolymerIcon = require('../../comps/polymer-icon.jsx');
 require('./map.less');
 
@@ -13,8 +14,10 @@ var MapPage = React.createClass({
 	},
 
 	componentDidUpdate(prevProps, prevState) {
-		if(prevProps.visible === false && this.props.visible === true)
+		if(prevProps.visible === false && this.props.visible === true) {
 			window.scrollTo(0, 0);
+			server.info.post({ data: 'map visible true' });
+		}
 	},
 
 	getDaumMapMarkup() {
@@ -48,10 +51,6 @@ var MapPage = React.createClass({
 		params += '&markers=127.927813,36.994482';
 
 		return 'http://openapi.naver.com/map/getStaticMap?' + params;
-	},
-
-	goToNaverMap() {
-		window.location.href = 'http://map.naver.com/?dlevel=12&pinType=site&pinId=35585757&x=127.9279455&y=36.9945793&enc=b64';
 	},
 
 	render() {

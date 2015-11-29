@@ -2,8 +2,10 @@ var request = require('superagent');
 var Promise = require('promise');
 
 var url = {
-	guestbook: '/data/guestbook'
+	guestbook: '/data/guestbook',
+	info: '/data/info'
 };
+
 
 module.exports = {
 	guestbook: {
@@ -58,6 +60,17 @@ module.exports = {
 						}
 					});
 			});
+		}
+	},
+	info: {
+		//args: data
+		post(args) {
+			request
+				.get(url.info)
+				.query({
+					data: args.data
+				})
+				.end(function(err, resp) {});
 		}
 	}
 };

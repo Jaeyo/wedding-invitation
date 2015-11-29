@@ -1,6 +1,7 @@
 var React = require('react');
 var PolymerIcon = require('../../comps/polymer-icon.jsx');
 var Clearfix = require('../../comps/clearfix.jsx');
+var server = require('../../util/server.js');
 require('./home.less');
 
 var HomePage = React.createClass({
@@ -21,6 +22,11 @@ var HomePage = React.createClass({
 	componentDidUpdate(prevProps, prevState) {
 		if(prevProps.visible === false && this.props.visible === true)
 			window.scrollTo(0, 0);
+			server.info.post({ data: 'home visible true' });
+	},
+
+	componentDidMount() {
+		server.info.post({ data: 'home mounted' });
 	},
 
 	render() {
