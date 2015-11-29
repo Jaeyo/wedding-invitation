@@ -38,6 +38,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 //params: page
 app.get('/data/guestbook', function(req, resp) {
 	logger.info('GET, /data/guestbook', req.query);
+	logger.info(req.ip); //DEBUG
 
 	if(req.query.page == null) {
 		logger.warn('invalid params: ', req.query);

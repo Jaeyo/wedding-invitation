@@ -51,17 +51,21 @@ var HomePage = React.createClass({
 					</div>
 					<div className="when-where">
 						<div>
-							<label>when</label>
+							<label className="label">when</label>
 							<div className="when">2015. 12. 19 SAT, 13:30</div>
 							<Clearfix />
 						</div>
 						<div>
-							<label>where</label>
+							<label className="label">where</label>
 							<div className="where">
 								<div>충북 충주시 네스트웨딩홀</div>
 								<span className="sub-where">(충청북도 충주시 국원대로 259 네스트웨딩홀)</span>
 							</div>
 							<Clearfix />
+						</div>
+						<div className="bus">
+							<label>- 전세버스 타는 곳: </label>
+							<span>어디어디어디</span>
 						</div>
 					</div>
 				</div>
