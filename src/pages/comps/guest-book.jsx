@@ -150,7 +150,6 @@ var GuestBookPage = React.createClass({
 							backgroundColor="#bbbbbb" />
 					)
 				}
-			</div>
 			<Button
 				label="test1"
 				onClick={this.test1}
@@ -160,6 +159,7 @@ var GuestBookPage = React.createClass({
 				onClick={this.test2}
 				fullWidth={true} />
 			<input type="file" />
+			</div>
 		);
 	}
 });
