@@ -35,7 +35,7 @@ var HomePage = React.createClass({
 				className="home-container"
 				style={{ display: this.props.visible === true ? 'block' : 'none' }}>
 				<div className="p1">
-					<div className="title">we getting married</div>
+					<div className="title">we're getting married</div>
 					<div className="subtitle">재용 & 보경</div>
 				</div>
 				<div className="p2">
