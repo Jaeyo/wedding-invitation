@@ -35,6 +35,11 @@ var GuestBookPage = React.createClass({
 		this.loadGuestBook(this.state.page);
 	}, 
 
+	componentDidUpdate(prevProps, prevState) {
+		if(prevProps.visible === false && this.props.visible === true)
+			window.scrollTo(0, 0);
+	},
+
 	loadGuestBook(page) {
 		server.guestbook.get({
 			page: page

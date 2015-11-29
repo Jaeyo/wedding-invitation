@@ -17,6 +17,12 @@ var HomePage = React.createClass({
 		this.props.onPageChange('photo');
 	},
 
+
+	componentDidUpdate(prevProps, prevState) {
+		if(prevProps.visible === false && this.props.visible === true)
+			window.scrollTo(0, 0);
+	},
+
 	render() {
 		return (
 			<div 

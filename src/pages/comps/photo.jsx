@@ -80,6 +80,11 @@ var PhotoPage = React.createClass({
 		return { visible: false };
 	},
 
+	componentDidUpdate(prevProps, prevState) {
+		if(prevProps.visible === false && this.props.visible === true)
+			window.scrollTo(0, 0);
+	},
+
 	render() {
 		return (
 			<div
