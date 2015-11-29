@@ -1,23 +1,24 @@
-var fs = require('fs');
-var serialijse = require('serialijse');
+var Datastore = require('nedb');
+var db = new Datastore({ filename: './guestbook.db', autoload: true });
 
-var guestbooks = [];
+// db.remove({}, {}, function(err, numRemoved) {
+// 	console.log('remove', { err: err, numRemoved: numRemoved });
+// });
 
-fs.readFile('./guestbook.db', 'utf8', function(err, data) {
-	if(err) {
-		if(err.errno === -4058)
-			fs.writeFile('./guestbook.db', serialijse.serialize(guestbooks), function(err) {
-				if(err) console.log(err);
-			});
-	} else {
-		guestbooks = serialijse.deserialize(data);
-	}
 
-	console.log(guestbooks);
-	console.log(typeof guestbooks[0].regdate);
+// for(var i=0; i<100; i++) {
+// 	var doc = {
+// 		index: i,
+// 		msg: 'msg from ' + i
+// 	};
 
-	console.log('size: ' + guestbooks.length);
+// 	db.insert(doc, function(err, newDoc) {
+// 		if(err) console.log(err);
+// 	});
+// }
 
-	console.log('end');
-
+db.find({}).sort({ index: 1 }).skip(40).limit(10).exec(function(err, docs) {
+	console.log(docs);
 });
+
+console.log('end');

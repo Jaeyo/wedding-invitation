@@ -1,4 +1,5 @@
 var React = require('react');
+var moment = require('moment');
 var PolymerIcon = require('../../comps/polymer-icon.jsx');
 var server = require('../../util/server.js');
 var Button = require('material-ui/lib/raised-button');
@@ -8,6 +9,8 @@ var CardHeader = require('material-ui/lib/card/card-header');
 var CardText = require('material-ui/lib/card/card-text');
 var CardTitle = require('material-ui/lib/card/card-title');
 require('./guest-book.less');
+
+moment.locale('ko');
 
 var GuestBookPage = React.createClass({
 	PropTypes: {
@@ -22,48 +25,66 @@ var GuestBookPage = React.createClass({
 		return {
 			name: '',
 			msg: '',
-			lastGuestBookUUID: null,
-			guestBooks: []
+			page: 1,
+			guestBooks: [],
+			isLast: false
 		};
 	},
 
 	componentDidMount() {
-		this.loadGuestBook();
+		this.loadGuestBook(this.state.page);
 	}, 
 
-	loadGuestBook() {
+	loadGuestBook(page) {
 		server.guestbook.get({
-			startUUID: this.state.lastGuestBookUUID == null ? null : this.state.lastGuestBookUUID,
-			count: 10
-		}).then(function(resp) {
-			if(resp.ok) {
-				this.setState({ guestBooks: this.state.guestBooks.concat(resp.guestBooks) });
-			} else {
-				alert('error: ' + JSON.stringify(resp.error));
-				console.log(resp.error); //DEBUG
-			}
+			page: page
+		}).then(function(data) {
+			var isLast = (data == null || data.length != 10);
+			console.log(isLast); //DEBUG
+			this.setState({ 
+				guestBooks: this.state.guestBooks.concat(data),
+				page: page,
+				isLast: isLast
+			});
 		}.bind(this)).catch(function(err) {
-			alert('error: ' + JSON.stringify(err));
+			alert('error: ' + err);
 			console.log(err); //DEBUG
 		});
 	},
 
-	onChangeName(evt) {
-		this.setState({ name: evt.target.value });
+	handleChange(name, evt) {
+		var state = {};
+		state[name] = evt.target.value;
+		this.setState(state);
 	},
 
-	onChangeMsg(evt) {
-		this.setState({ msg: evt.target.value });
+	moreGuestBook() {
+		this.loadGuestBook(this.state.page + 1);
 	},
 
 	onSendBtnClick(evt) {
+		if(this.state.name.trim().length === 0) {
+			alert('이름을 입력해주세요.');
+			return;
+		} else if(this.state.msg.trim().length === 0) {
+			alert('메시지를 입력해주세요.');
+			return;
+		}
+
 		server.guestbook.post({
 			name: this.state.name,
 			msg: this.state.msg
 		}).then(function(resp) {
-
-		}).catch(function(err) {
-			alert('error: ' + JSON.stringify(err));
+			this.setState({
+				page: 1,
+				guestBooks: [],
+				name: '',
+				msg: ''
+			}, function() {
+				this.loadGuestBook(1);
+			}.bind(this));
+		}.bind(this)).catch(function(err) {
+			alert('error: ' + err);
 			console.log(err); //DEBUG
 		});
 	},
@@ -77,18 +98,20 @@ var GuestBookPage = React.createClass({
 		return (
 			<div className="guest-book-container"
 				style={{ display: this.props.visible === true ? 'block' : 'none' }}>
-				<Card>
+				<Card className="card">
 					<CardText>
 						<TextField
 							floatingLabelText="이름"
 							style={{ width: '40%' }}
-							onChange={this.onChangeName}
+							value={this.state.name}
+							onChange={this.handleChange.bind(this, 'name')}
 							{...textFieldProps} />
 						<TextField
 							floatingLabelText="메시지"
 							multiLine={true}
 							style={{ width: '100%' }}
-							onChange={this.onChangeMsg}
+							value={this.state.msg}
+							onChange={this.handleChange.bind(this, 'msg')}
 							{...textFieldProps} />
 						<div className="btn-area">
 							<Button 
@@ -101,8 +124,22 @@ var GuestBookPage = React.createClass({
 				</Card>
 				{
 					this.state.guestBooks.map(function(guestbook) {
-						return (<GuestBook {...guestbook} />);
+						return (
+							<GuestBook 
+								key={guestbook.uuid} 
+								{...guestbook} />
+						);
 					})
+				}
+				{
+					this.state.isLast === true ? null : (
+						<Button
+							label="더보기"
+							secondary={true}
+							onClick={this.moreGuestBook}
+							fullWidth={true}
+							backgroundColor="#bbbbbb" />
+					)
 				}
 			</div>
 		);
@@ -111,10 +148,11 @@ var GuestBookPage = React.createClass({
 
 var GuestBook = (props) => {
 	return (
-		<Card>
+		<Card className="card guestbook-card">
 			<CardText>
-				<div>{props.name}</div>
-				<div>{props.msg}</div>
+				<div className="regdate">{moment(props.regdate).fromNow()}</div>
+				<div className="name">{props.name}</div>
+				<div className="msg">{props.msg}</div>
 			</CardText>
 		</Card>
 	);

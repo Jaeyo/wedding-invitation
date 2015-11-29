@@ -2,11 +2,8 @@ var express = require('express');
 var path = require('path');
 var BodyParser = require('body-parser');
 var winston = require('winston');
-var fs = require('fs');
 var uuid = require('node-uuid');
-var serialijse = require('serialijse');
-var serialize = serialijse.serialize;
-var deserialize = serialijse.deserialize;
+var GuestBookModel = require('./src/server/model/guestbook.js');
 
 var logger = new (winston.Logger)({
 	transports: [
@@ -29,43 +26,6 @@ var logger = new (winston.Logger)({
 	]
 });
 
-var guestbooksDB = {
-	data: [],
-	push: function(guestbook) {
-		this.data.push(guestbook);
-		fs.writeFile('./guestbooks.db', this.data, function(err) {
-			logger.error(err);
-		});
-	},
-	get: function(startUUID, count) {
-		var started = startUUID === 'top' ? true : false;
-		var result = [];
-
-		this.data.every(function(doc) {
-			if(started === false) return true;
-
-			result.push(doc);
-			if(result.length >= count) return false;
-
-			return true;
-		});
-		return result;
-	}
-};
-
-fs.readFile('./guestbooks.db', 'utf8', function(err, data) {
-	if(err) {
-		if(err.errno === -4058) {
-			fs.writeFile('./guestbooks.db', guestbooksDB.data, function(err) {
-				if(err) logger.error(err);
-			});
-		}
-		return;
-	}
-
-	guestbooksDB.data = deserialize(data);
-});
-
 
 var app = express();
 app.set('port', 3000);
@@ -73,23 +33,30 @@ app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '/public')));
 
-//params: startUUID, count
-app.get('/data/guestbook', function(req, resp) {
-	logger.info('GET, /data/guestbook');
 
-	if(req.params.startUUID == null || req.params.count == null) {
-		logger.warn('invalid params: ', req.params);
+
+//params: page
+app.get('/data/guestbook', function(req, resp) {
+	logger.info('GET, /data/guestbook', req.query);
+
+	if(req.query.page == null) {
+		logger.warn('invalid params: ', req.query);
 		resp.json({ error: 'invalid params' });
 		return;
 	}
 
-	var result = guestbooksDB.get(req.params.startUUID, req.params.count);
-	resp.json({ data: result });
+	GuestBookModel.get(req.query.page, 10)
+		.then(function(docs) {
+			resp.json({ ok: true, data: docs });
+		}).catch(function(err) {
+			logger.error(err);
+			resp.json({ ok: false, error: err });
+		});
 });
 
 //body: name, msg
 app.post('/data/guestbook', function(req, resp) {
-	logger.info('POST , /data/guestbook');
+	logger.info('POST , /data/guestbook', req.body);
 
 	var guestbook = {
 		uuid: uuid.v4(),
@@ -104,9 +71,15 @@ app.post('/data/guestbook', function(req, resp) {
 		return;
 	}
 
-	guestbooksDB.push(guestbook);
-	resp.json({ ok: true });
+	GuestBookModel.push(guestbook)
+		.then(function(doc) {
+			resp.json({ ok: true });
+		}).catch(function(err) {
+			resp.json({ ok: false, error: err });
+		});
 });
+
+
 
 var server = app.listen(app.get('port'), function() {
 	logger.info('server started', {

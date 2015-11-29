@@ -7,17 +7,20 @@ var url = {
 
 module.exports = {
 	guestbook: {
-		// args: startUUID, count
+		// args: page
 		get(args) {
-			if(args.startUUID == null) args.startUUID = 'top';
-
 			return new Promise(function(resolve, reject) {
 				request
 					.get(url.guestbook)
 					.query({
-						startUUID: args.startUUID,
-						count: args.count
-					}).end(function(resp) {
+						page: args.page
+					}).end(function(err, resp) {
+						if(err) {
+							if(typeof err === 'object') err = JSON.stringify(err);
+							reject(err);
+							return;
+						}
+
 						if(resp.ok) {
 							resolve(resp.body.data);
 						} else {
@@ -30,7 +33,8 @@ module.exports = {
 		//args: name, msg
 		post(args) {
 			return new Promise(function(resolve, reject) {
-				if(args.contents == null || args.contents.trim().length === 0) {
+				if(args.name == null || args.name.trim().length === 0 ||
+					args.msg == null || args.msg.trim().length === 0) {
 					reject({ errmsg: 'invalid args: msg' });
 					return;
 				}
@@ -40,7 +44,13 @@ module.exports = {
 					.send({
 						name: args.name,
 						msg: args.msg
-					}).end(function(resp) {
+					}).end(function(err, resp) {
+						if(err) {
+							if(typeof err === 'object') err = JSON.stringify(err);
+							reject(err);
+							return;
+						}
+
 						if(resp.ok) {
 							resolve(resp.body.data);
 						} else {
