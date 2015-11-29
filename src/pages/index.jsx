@@ -1,15 +1,16 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var PolymerIcon = require('../comps/polymer-icon.jsx');
-var NavBar = require('./comps/nav-bar.jsx');
-var HomePage = require('./comps/home.jsx');
-var PhotoPage = require('./comps/photo.jsx');
-var MapPage = require('./comps/map.jsx');
-var GuestBookPage = require('./comps/guest-book.jsx');
+var NavBar = require('./index/nav-bar.jsx');
+var HomePage = require('./index/home.jsx');
+var PhotoPage = require('./index/photo.jsx');
+var MapPage = require('./index/map.jsx');
+var GuestBookPage = require('./index/guest-book.jsx');
+var AdminPage = require('./admin.jsx');
 require('./index.less');
 require('../reset.less');
 
-var Page = React.createClass({
+var IndexPage = React.createClass({
 	getInitialState() {
 		return { page: 'home' };
 	},
@@ -33,4 +34,9 @@ var Page = React.createClass({
 	}
 });
 
-ReactDOM.render(<Page />, document.getElementById('root'));
+var pathname = window.location.pathname;
+if(pathname === '/') {
+	ReactDOM.render(<IndexPage />, document.getElementById('root'));
+} else if(pathname === '/admin')  {
+	ReactDOM.render(<AdminPage />, document.getElementById('root'));
+}

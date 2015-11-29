@@ -5,11 +5,6 @@ var LazyLoad = require('react-lazy-load').default;
 var PolymerIcon = require('../../comps/polymer-icon.jsx');
 require('./photo.less');
 
-console.log('test');
-console.log(LazyLoad);
-console.log(PolymerIcon);
-console.log('test1');
-
 var OLD_photoUrls = [
 	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG0004.jpg',
 	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG0018.jpg',

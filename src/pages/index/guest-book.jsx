@@ -48,7 +48,6 @@ var GuestBookPage = React.createClass({
 			page: page
 		}).then(function(data) {
 			var isLast = (data == null || data.length != 10);
-			console.log(isLast); //DEBUG
 			this.setState({ 
 				guestBooks: this.state.guestBooks.concat(data),
 				page: page,

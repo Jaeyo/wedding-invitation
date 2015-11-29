@@ -35,6 +35,11 @@ app.use(BodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '/public')));
 
 
+app.get('/admin', function(req, resp) {
+	logger.info('GET, /admin', req.query);
+	resp.sendFile(path.join(__dirname, '/public/admin.html'));
+});
+
 //query: page
 app.get('/data/guestbook', function(req, resp) {
 	logger.info('GET, /data/guestbook', req.query);
