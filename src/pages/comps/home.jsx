@@ -57,7 +57,10 @@ var HomePage = React.createClass({
 						</div>
 						<div>
 							<label>where</label>
-							<div className="where">충북 충주시 네스트웨딩홀</div>
+							<div className="where">
+								충북 충주시 네스트웨딩홀
+								<span className="sub-where">(충청북도 충주시 국원대로 259 네스트웨딩홀)</span>
+							</div>
 							<Clearfix />
 						</div>
 					</div>
