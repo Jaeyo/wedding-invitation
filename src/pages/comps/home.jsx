@@ -5,11 +5,16 @@ require('./home.less');
 
 var HomePage = React.createClass({
 	PropTypes: {
-		visible: React.PropTypes.bool.isRequired
+		visible: React.PropTypes.bool.isRequired,
+		onPageChange: React.PropTypes.func.isRequired
 	},
 
 	getDefaultProps() {
 		return { visible: false };
+	},
+
+	goToPhoto() {
+		this.props.onPageChange('photo');
 	},
 
 	render() {

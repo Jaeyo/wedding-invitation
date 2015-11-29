@@ -21,7 +21,7 @@ var Page = React.createClass({
 	render() {
 		return (
 			<div>
-				<HomePage visible={this.state.page === 'home'} />
+				<HomePage visible={this.state.page === 'home'} onPageChange={this.onPageChange} />
 				<NavBar onPageChange={this.onPageChange} />
 				<PhotoPage visible={this.state.page === 'photo'} />
 				<MapPage visible={this.state.page === 'map'} />
