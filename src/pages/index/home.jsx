@@ -76,15 +76,14 @@ var HomePage = React.createClass({
 					</div>
 				</div>
 				<div className="p3">
-					<div>
-						<span className="balloon-icon">
-							<PolymerIcon icon="balloon" size="1.4" />
-						</span>
-					</div>
+					<BalloonImg />
 				</div>
 			</div>
 		);
 	}
 });
-
 module.exports = HomePage;
+
+var BalloonImg = (props) => {
+	return ( <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACiElEQVRYR62XgTEEQRBF/0WACBABIkAEiAARIAJEgAgQARkgAyJABIiAeqpb7c12z+zemaotZ2em+8/v3z29E7XHoqQjSbuS1m35oySeW/t/X9KWPbx6lnQv6UrSZ83FpOH/QNKFJEC8mGG2AGSt2BvN4/xE0k3mpwYA59fm+NhO3LVzacw8SWLtW+EERlgD0MMMRAZgRdKrOcdQSSPvHiwEOC8HjGEDUIQKEKsBSGUAoIy4hpvMKGHASRRj9u9I2rZ5DoNeemAzABgFOcIrh7ODwAhNNADnQsUGgtyUtFQujgC4g3NJZ4F1p5/T4SQbTj1OsXMaMRoBcAf/AQAtwIYD6IGOALDpQ1ILwJ5RmzHQDaMD6PnLNIB6eWAjUjgAaxpgDwAQHfEnHISWZ2q0soD4RSrH4LLFtCKD3ylndFQWtHTgRSotMB1UafxZU6uE3QJSssCpCBGhoFZkg3XdgtZbVwPgLBBDBFcOZyETK+vZ6wUpTNnWZeT1nsoG3d3hAHgXhcKraVWsLQAYd0Ncsfx2dcMQFxGDKscJmYd2wJH/ofC6pxgCgPWUXB6Uz/iym84rJX+ZX7D5d5uHweoYCgAjnk4Y7+WzvUNwsBLVjxDIGACt1IQBmpdWhZwC8p8AXJStS2pmAGxEgKRW1IS0btG5Q+AZQV737nWzDjiEutESn8+PCQF7Wr2AhyHrpHq4xgJo0dwCODcAVzqtdpTjXjkHC3EMA04vRShqRv3W4/sg6qTnEiGN5Z216fwuvwFmcg6ioQxQ56n3mbhIT8pw1sCkSTEUgF+rtQ4JgEPt/QEauqFVhsd0SDNXwlqHhFF08T2wTxzNABv8awc26A3KgTjpB7LPtVAHP8GisSGLN0ilAAAAAElFTkSuQmCC"/> );
+};

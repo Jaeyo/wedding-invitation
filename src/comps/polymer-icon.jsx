@@ -1,5 +1,6 @@
 var React = require('react');
 var util = require('util');
+var _ = require('underscore');
 
 var PolymerIcon = React.createClass({
 	//http://dmfrancisco.github.io/react-icons/
@@ -14,9 +15,12 @@ var PolymerIcon = React.createClass({
 	getDefaultProps() {
 		return { size: 24 };
 	},
+
 	_mergeStyle(...args) {
-		return Object.assign({}, ...args);
+		// return Object.assign({}, ...args);
+		return _.extend({}, ...args);
 	},
+
 	renderGraphic() {
 		switch(this.props.icon) {
 		case 'my-icon':
