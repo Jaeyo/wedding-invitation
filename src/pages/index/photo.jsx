@@ -1,7 +1,6 @@
 var React = require('react');
 var server = require('../../util/server.js');
 var util = require('util');
-var LazyLoad = require('react-lazy-load').default;
 var PolymerIcon = require('../../comps/polymer-icon.jsx');
 require('./photo.less');
 
@@ -102,9 +101,7 @@ var PhotoPage = React.createClass({
 				{
 					photoUrls.map(function(url) {
 						return ( 
-							<LazyLoad threshold={400} key={url}>
-								<img className="photo" src={url} /> 
-							</LazyLoad>
+							<img className="photo" src={url} /> 
 						);
 					})
 				}
