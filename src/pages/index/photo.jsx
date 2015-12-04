@@ -1,9 +1,6 @@
 var React = require('react');
 var server = require('../../util/server.js');
 var util = require('util');
-window.$ = require('jquery');
-window.jQuery = $;
-require('lightslider');
 require('./photo.less');
 
 var photoUrls = [
@@ -44,49 +41,6 @@ var photoUrls = [
 
 
 
-// var PhotoPage = React.createClass({
-// 	PropTypes: {
-// 		visible: React.PropTypes.bool.isRequired
-// 	},
-
-// 	getDefaultProps() {
-// 		return { visible: false };
-// 	},
-
-// 	componentDidUpdate(prevProps, prevState) {
-// 		if(prevProps.visible === false && this.props.visible === true) {
-// 			window.scrollTo(0, 0);
-// 			server.info.post({ data: 'photo visible true' });
-
-// 			var counter = 3;
-// 			var infoFn = function() {
-// 				if(this.props.visible === true) {
-// 					server.info.post({ data: util.format('photo stay %s', counter) });
-// 					counter += 3;
-// 					window.setTimeout(infoFn, 3000);
-// 				}
-// 			}.bind(this);
-// 			window.setTimeout(infoFn, 3000);
-// 		}
-// 	},
-
-// 	render() {
-// 		return (
-// 			<div
-// 				className="photo-container"
-// 				style={{ display: this.props.visible === true ? 'block' : 'none'}}>
-// 				{
-// 					photoUrls.map(function(url) {
-// 						return ( 
-// 							<img className="photo" src={url} /> 
-// 						);
-// 					})
-// 				}
-// 			</div>
-// 		);
-// 	}
-// });
-
 var PhotoPage = React.createClass({
 	PropTypes: {
 		visible: React.PropTypes.bool.isRequired
@@ -96,31 +50,35 @@ var PhotoPage = React.createClass({
 		return { visible: false };
 	},
 
-	componentDidMount() {
-		$(document).ready(function() {
-			$('#light-slider').lightSlider({
-				gallery: true,
-				item: 1,
-				slideMargin: 0,
-				thumbMargin: 4,
-				thumbItem: 8
-			});
-		})
+	componentDidUpdate(prevProps, prevState) {
+		if(prevProps.visible === false && this.props.visible === true) {
+			window.scrollTo(0, 0);
+			server.info.post({ data: 'photo visible true' });
+
+			var counter = 3;
+			var infoFn = function() {
+				if(this.props.visible === true) {
+					server.info.post({ data: util.format('photo stay %s', counter) });
+					counter += 3;
+					window.setTimeout(infoFn, 3000);
+				}
+			}.bind(this);
+			window.setTimeout(infoFn, 3000);
+		}
 	},
 
 	render() {
 		return (
-			<div className="photo-container"
-				style={{ display: this.props.visible === true ? 'block' : 'none' }}>
-				<ul id="light-slider">
+			<div
+				className="photo-container"
+				style={{ display: this.props.visible === true ? 'block' : 'none'}}>
 				{
 					photoUrls.map(function(url) {
 						return ( 
-							<li key={url}><img className="photo" src={url} /></li>
+							<img className="photo" src={url} /> 
 						);
 					})
 				}
-				</ul>
 			</div>
 		);
 	}
