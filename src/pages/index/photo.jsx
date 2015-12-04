@@ -1,33 +1,10 @@
 var React = require('react');
 var server = require('../../util/server.js');
 var util = require('util');
-var PolymerIcon = require('../../comps/polymer-icon.jsx');
+window.$ = require('jquery');
+window.jQuery = $;
+require('lightslider');
 require('./photo.less');
-
-var OLD_photoUrls = [
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG0004.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG0018.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG0035.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG0064.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG0106.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG0220.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG0409.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG0592.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG0701.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG0819.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG0832.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG0948.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG0975.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG1038.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG1142.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG1244.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG1281.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG1313.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG1360.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG1400.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG1443.jpg',
-	'https://googledrive.com/host/0B0Q0WceCbJRzbFVpUnFlNDR5UEE/HONG1483.jpg'
-];
 
 var photoUrls = [
 	'http://res.cloudinary.com/dyx4otqsu/image/upload/c_scale,w_512/v1448792935/HONG0004_dy6wvi.jpg',
@@ -67,6 +44,49 @@ var photoUrls = [
 
 
 
+// var PhotoPage = React.createClass({
+// 	PropTypes: {
+// 		visible: React.PropTypes.bool.isRequired
+// 	},
+
+// 	getDefaultProps() {
+// 		return { visible: false };
+// 	},
+
+// 	componentDidUpdate(prevProps, prevState) {
+// 		if(prevProps.visible === false && this.props.visible === true) {
+// 			window.scrollTo(0, 0);
+// 			server.info.post({ data: 'photo visible true' });
+
+// 			var counter = 3;
+// 			var infoFn = function() {
+// 				if(this.props.visible === true) {
+// 					server.info.post({ data: util.format('photo stay %s', counter) });
+// 					counter += 3;
+// 					window.setTimeout(infoFn, 3000);
+// 				}
+// 			}.bind(this);
+// 			window.setTimeout(infoFn, 3000);
+// 		}
+// 	},
+
+// 	render() {
+// 		return (
+// 			<div
+// 				className="photo-container"
+// 				style={{ display: this.props.visible === true ? 'block' : 'none'}}>
+// 				{
+// 					photoUrls.map(function(url) {
+// 						return ( 
+// 							<img className="photo" src={url} /> 
+// 						);
+// 					})
+// 				}
+// 			</div>
+// 		);
+// 	}
+// });
+
 var PhotoPage = React.createClass({
 	PropTypes: {
 		visible: React.PropTypes.bool.isRequired
@@ -76,35 +96,31 @@ var PhotoPage = React.createClass({
 		return { visible: false };
 	},
 
-	componentDidUpdate(prevProps, prevState) {
-		if(prevProps.visible === false && this.props.visible === true) {
-			window.scrollTo(0, 0);
-			server.info.post({ data: 'photo visible true' });
-
-			var counter = 3;
-			var infoFn = function() {
-				if(this.props.visible === true) {
-					server.info.post({ data: util.format('photo stay %s', counter) });
-					counter += 3;
-					window.setTimeout(infoFn, 3000);
-				}
-			}.bind(this);
-			window.setTimeout(infoFn, 3000);
-		}
+	componentDidMount() {
+		$(document).ready(function() {
+			$('#light-slider').lightSlider({
+				gallery: true,
+				item: 1,
+				slideMargin: 0,
+				thumbMargin: 4,
+				thumbItem: 8
+			});
+		})
 	},
 
 	render() {
 		return (
-			<div
-				className="photo-container"
-				style={{ display: this.props.visible === true ? 'block' : 'none'}}>
+			<div className="photo-container"
+				style={{ display: this.props.visible === true ? 'block' : 'none' }}>
+				<ul id="light-slider">
 				{
 					photoUrls.map(function(url) {
 						return ( 
-							<img className="photo" src={url} /> 
+							<li key={url}><img className="photo" src={url} /></li>
 						);
 					})
 				}
+				</ul>
 			</div>
 		);
 	}

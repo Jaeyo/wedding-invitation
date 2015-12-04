@@ -35,7 +35,6 @@ var IndexPage = React.createClass({
 });
 
 var pathname = window.location.pathname;
-console.log('pathname: ' + pathname); //DEBUG
 if(pathname === '/') {
 	ReactDOM.render(<IndexPage />, document.getElementById('root'));
 } else if(pathname === '/admin')  {
