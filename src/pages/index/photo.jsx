@@ -75,7 +75,7 @@ var PhotoPage = React.createClass({
 				{
 					photoUrls.map(function(url) {
 						return ( 
-							<img className="photo" src={url} /> 
+							<img key={url} className="photo" src={url} /> 
 						);
 					})
 				}
