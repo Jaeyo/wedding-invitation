@@ -26,7 +26,7 @@ var photoUrls = [
 	'http://res.cloudinary.com/dyx4otqsu/image/upload/c_scale,w_512/v1448793145/HONG1400_wnfrfr.jpg',
 	'http://res.cloudinary.com/dyx4otqsu/image/upload/c_scale,w_512/v1448793146/HONG1443_awdsq1.jpg',
 	'http://res.cloudinary.com/dyx4otqsu/image/upload/c_scale,w_512/v1448793146/HONG1483_zjrlbu.jpg',
-	'http://res.cloudinary.com/dyx4otqsu/image/upload/c_scale,w_512/v1448793147/HONG1716_o8lux3.jpg',
+	// 'http://res.cloudinary.com/dyx4otqsu/image/upload/c_scale,w_512/v1448793147/HONG1716_o8lux3.jpg',
 	'http://res.cloudinary.com/dyx4otqsu/image/upload/c_scale,w_512/v1448793147/HONG1827_lhxso1.jpg',
 	'http://res.cloudinary.com/dyx4otqsu/image/upload/c_scale,w_512/v1448793147/HONG1509_skdgop.jpg',
 	'http://res.cloudinary.com/dyx4otqsu/image/upload/c_scale,w_512/v1448793147/HONG1759_wi4ipx.jpg',
@@ -34,7 +34,7 @@ var photoUrls = [
 	'http://res.cloudinary.com/dyx4otqsu/image/upload/c_scale,w_512/v1448793148/HONG1697_l8zmlg.jpg',
 	'http://res.cloudinary.com/dyx4otqsu/image/upload/c_scale,w_512/v1448793148/HONG2022_nmj1ow.jpg',
 	'http://res.cloudinary.com/dyx4otqsu/image/upload/c_scale,w_512/v1448793148/HONG2066_i3uiie.jpg',
-	'http://res.cloudinary.com/dyx4otqsu/image/upload/c_scale,w_512/v1448793149/HONG2089_dagl92.jpg',
+	// 'http://res.cloudinary.com/dyx4otqsu/image/upload/c_scale,w_512/v1448793149/HONG2089_dagl92.jpg',
 	'http://res.cloudinary.com/dyx4otqsu/image/upload/c_scale,w_512/v1448793148/HONG2235_ihlxks.jpg'
 ];
 
