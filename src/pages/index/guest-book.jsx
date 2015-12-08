@@ -38,12 +38,12 @@ var GuestBookPage = React.createClass({
 	componentDidUpdate(prevProps, prevState) {
 		if(prevProps.visible === false && this.props.visible === true) {
 			window.scrollTo(0, 0);
-			server.info.post({ data: 'guest-book visible true' });
+			server.trace.post({ data: 'guest-book visible true' });
 		}
 	},
 
 	loadGuestBook(page) {
-		server.info.post({ data: 'load guest book' });
+		server.trace.post({ data: 'load guest book' });
 		server.guestbook.get({
 			page: page
 		}).then(function(data) {
@@ -66,7 +66,7 @@ var GuestBookPage = React.createClass({
 	},
 
 	moreGuestBook() {
-		server.info.post({ data: 'load more guest book, ' + this.state.page+1 });
+		server.trace.post({ data: 'load more guest book, ' + this.state.page+1 });
 		this.loadGuestBook(this.state.page + 1);
 	},
 

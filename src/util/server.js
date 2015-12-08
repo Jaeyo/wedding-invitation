@@ -3,7 +3,8 @@ var Promise = require('promise');
 
 var url = {
 	guestbook: '/data/guestbook',
-	info: '/data/info'
+	guestbookAll: '/data/guestbook/all',
+	trace: '/data/trace'
 };
 
 
@@ -31,6 +32,26 @@ module.exports = {
 					});
 			});
 		}, 
+
+		getAll() {
+			return new Promise(function(resolve, reject) {
+				request
+					.get(url.guestbookAll)
+					.end(function(err, resp) {
+						if(err) {
+							if(typeof err === 'object') err = JSON.stringify(err);
+							reject(err);
+							return;
+						}
+
+						if(resp.ok) {
+							resolve(resp.body.data);
+						} else {
+							reject(resp.error)
+						}
+					});
+			});
+		},
 
 		//args: name, msg
 		post(args) {
@@ -62,15 +83,35 @@ module.exports = {
 			});
 		}
 	},
-	info: {
+	trace: {
 		//args: data
 		post(args) {
 			request
-				.get(url.info)
-				.query({
+				.post(url.trace)
+				.type('form')
+				.send({
 					data: args.data
 				})
 				.end(function(err, resp) {});
+		},
+		get() {
+			return new Promise(function(resolve, reject) {
+				request
+					.get(url.trace)
+					.end(function(err, resp) {
+						if(err) {
+							if(typeof err === 'object') err = JSON.stringify(err);
+							reject(err);
+							return;
+						}
+
+						if(resp.ok) {
+							resolve(resp.body.data);
+						} else {
+							reject(resp.error)
+						}
+					});
+			});
 		}
 	}
 };

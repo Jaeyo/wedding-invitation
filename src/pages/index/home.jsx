@@ -22,11 +22,11 @@ var HomePage = React.createClass({
 	componentDidUpdate(prevProps, prevState) {
 		if(prevProps.visible === false && this.props.visible === true)
 			window.scrollTo(0, 0);
-			server.info.post({ data: 'home visible true' });
+			server.trace.post({ data: 'home visible true' });
 	},
 
 	componentDidMount() {
-		server.info.post({ data: 'home mounted' });
+		server.trace.post({ data: 'home mounted' });
 	},
 
 	render() {

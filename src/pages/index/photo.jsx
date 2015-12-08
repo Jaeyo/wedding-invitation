@@ -53,12 +53,12 @@ var PhotoPage = React.createClass({
 	componentDidUpdate(prevProps, prevState) {
 		if(prevProps.visible === false && this.props.visible === true) {
 			window.scrollTo(0, 0);
-			server.info.post({ data: 'photo visible true' });
+			server.trace.post({ data: 'photo visible true' });
 
 			var counter = 3;
 			var infoFn = function() {
 				if(this.props.visible === true) {
-					server.info.post({ data: util.format('photo stay %s', counter) });
+					server.trace.post({ data: util.format('photo stay %s', counter) });
 					counter += 3;
 					window.setTimeout(infoFn, 3000);
 				}

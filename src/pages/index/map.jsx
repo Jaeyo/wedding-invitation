@@ -16,7 +16,7 @@ var MapPage = React.createClass({
 	componentDidUpdate(prevProps, prevState) {
 		if(prevProps.visible === false && this.props.visible === true) {
 			window.scrollTo(0, 0);
-			server.info.post({ data: 'map visible true' });
+			server.trace.post({ data: 'map visible true' });
 		}
 	},
 

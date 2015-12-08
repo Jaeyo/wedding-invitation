@@ -59,15 +59,39 @@ app.get('/data/guestbook', function(req, resp) {
 		});
 });
 
+app.get('/data/guestbook/all', function(req, resp) {
+	logger.info('GET, /data/guestbook/all');
+
+	GuestBookModel.getAll()
+		.then(function(docs) {
+			resp.json({ ok: true, data: docs });
+		}).catch(function(err) {
+			logger.error(err);
+			resp.json({ ok: false, error: err });
+		});
+});
+
 //query: data
-app.get('/data/info', function(req, resp) {
-	logger.info('GET, /data/info', req.query);
-	resp.json({ ok: true });
-	TraceModel.push({
-		regdate: new Date(),
-		ip: req.ip,
-		data: req.query.data
-	});
+app.post('/data/trace', function(req, resp) {
+	logger.info('POST, /data/trace', req.body);
+
+	TraceModel.push({ regdate: new Date(), ip: req.ip, data: req.body.data })
+		.then(function() {
+			resp.json({ ok: true });
+		}).catch(function(err) {
+			resp.json({ ok: false, error: err });
+		});
+});
+
+app.get('/data/trace', function(req, resp) {
+	logger.info('GET, /data/trace', req.query);
+	TraceModel.get()
+		.then(function(docs) {
+			resp.json({ ok: true, data: docs });
+		}).catch(function(err) {
+			logger.error(err);
+			resp.json({ ok: false, error: err });
+		});
 });
 
 //body: name, msg
