@@ -71,7 +71,7 @@ var HomePage = React.createClass({
 						</div>
 						<div className="bus">
 							<label>- 전세버스 타는 곳: </label>
-							<span>신길역 광장 오전 10시</span>
+							<span>신길역 1번 출구 광장 오전 10시</span>
 						</div>
 					</div>
 				</div>
